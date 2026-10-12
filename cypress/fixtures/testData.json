@@ -1,0 +1,9 @@
+{
+  "baseUrl": "https://www.saucedemo.com",
+  "standardUsername": "standard_user",
+  "validPassword": "secret_sauce",
+  "invalidUsername": "invalid_user",
+  "lockedOutUsername": "locked_out_user",
+  "problemUsername": "problem_user",
+  "invalidPassword": "invalid_password" 
+}
