@@ -1,4 +1,5 @@
 import { baseUrl } from "../fixtures/testData.json";
+import MainPage from "../pageObject/mainPage"
 class LoginPage{
 
     usernameInput(){

@@ -1,3 +1,4 @@
+import CartPage from "../pageObject/cartPage"
 class MainPage{
     appLogo(){
         return cy.get('.app_logo')
@@ -25,6 +26,10 @@ class MainPage{
 
     removeButton(){
         return cy.get('#remove-sauce-labs-backpack')
+    }
+
+    firstItem(){
+        return cy.get('.inventory_item').first()
     }
 
 }

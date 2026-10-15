@@ -2,6 +2,7 @@ import LoginPage from "../pageObject/loginPage";
 import testData from "../fixtures/testData.json";
 import MainPage from "../pageObject/mainPage";
 import ItemPage from "../pageObject/itemPage";
+import CartPage from "../pageObject/cartPage";
 
 describe("Inventory Tests", () => {
 
@@ -50,7 +51,7 @@ describe("Inventory Tests", () => {
     })
 
     it("should navigate to the product page when clicking on a product", () => {
-        cy.get(".inventory_item_name").first().click();
+        MainPage.firstItem().click();
         cy.url().should("contain", "/inventory-item.html");
         cy.get(".inventory_details_name").should("be.visible");
         cy.get(".inventory_details_desc").should("be.visible");
@@ -59,23 +60,40 @@ describe("Inventory Tests", () => {
     })
 
     it("back to the catalog when clicking on the back button", () => {
-        cy.get(".inventory_item_name").first().click();
+        MainPage.firstItem().click();
         ItemPage.backButton().click();
         cy.url().should("contain", "/inventory.html");
         MainPage.itemsList().should("have.length", 6);
         cy.get(".title").should("be.visible").and("contain", "Products");
     })
 
-    it("should add a product to the cart and verify the cart badge", () => {
+    it.only("should add a product to the cart and verify the cart badge", () => {
         MainPage.itemsList().first().within(() => {
             MainPage.addToCartButton().click();
         });
         MainPage.cartBadge().should("be.visible").and("contain", "1");
-        cy.get("#remove-sauce-labs-backpack").should("be.visible");
+        MainPage.removeButton().should("be.visible");
         MainPage.cartButton().click();
         cy.url().should("contain", "/cart.html");
         cy.get(".cart_item").should("have.length", 1);
         cy.get(".inventory_item_name").should("be.visible");
         cy.get(".inventory_item_price").should("be.visible");
+        CartPage.continueShoppingButton().click();
+        cy.url().should("contain", "/inventory.html");
+        MainPage.cartBadge().should("be.visible").and("contain", "1");
+    })
+
+    it("should check details of every product in the cart", () => {
+        cy.get(".inventory_item").each(($el, index) => {
+            cy.wrap($el).find(".btn_inventory").click();
+        })
+        MainPage.cartButton().click();
+        cy.url().should("contain", "/cart.html");
+        cy.get(".cart_item").each(($el, index) => {
+            cy.wrap($el).find(".inventory_item_name").should("be.visible");
+            cy.wrap($el).find(".inventory_item_price").should("be.visible");
+            cy.wrap($el).find(".cart_quantity").should("be.visible");
+            cy.wrap($el).find(".cart_button").should("be.visible");
+        })
     })
 })

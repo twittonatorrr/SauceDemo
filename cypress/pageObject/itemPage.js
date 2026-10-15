@@ -6,6 +6,10 @@ class ItemPage{
     removeButton(){
         return cy.get('#remove-sauce-labs-backpack')
     }
+
+    cartButton(){
+        return cy.get('#shopping_cart_container')
+    }
 }
 
 export default new ItemPage();
