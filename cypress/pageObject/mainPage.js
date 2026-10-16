@@ -32,6 +32,17 @@ class MainPage{
         return cy.get('.inventory_item').first()
     }
 
+    burgerMenuBtn(){
+        return cy.get("#react-burger-menu-btn")
+    }
+
+    logoutBtn(){
+        return cy.get("#logout_sidebar_link")
+    }
+
+    resetAppBtn(){
+        return cy.get("#reset_sidebar_link")
+    }
 }
 
 export default new MainPage()
