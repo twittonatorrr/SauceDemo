@@ -7,6 +7,13 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    specPattern: "cypress/e2e/**/*.js"
+    reporter: "mochawesome",
+    reporterOptions:{
+      reporterDir: "cypress/reports",
+      overwrite: false,
+      html: true,
+      json: false
+    },
+    specPattern: "cypress/e2e/**/*.js",
   },
 });

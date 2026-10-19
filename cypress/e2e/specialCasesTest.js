@@ -17,10 +17,8 @@ describe("Special Cases and Users Suite", ()=>{
         LoginPage.loginButton().should("be.visible")
     })
 
-    it("TC-35: should fail after trying to open main page without login", ()=>{
-        MainPage.burgerMenuBtn().click();
-        MainPage.logoutBtn().click();
-        cy.visit(
+    it.only("TC-35: should fail after trying to open main page without login", ()=>{
+        cy.clearAllCookies().visit(
             "https://www.saucedemo.com/inventory.html",
             {failOnStatusCode: false}
         )
